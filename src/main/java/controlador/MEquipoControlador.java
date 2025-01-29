@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.MEquipoModelo;
 
@@ -46,12 +47,80 @@ public class MEquipoControlador {
         } catch (SQLException e) {
             //CAPTURAR PARA DARLE UN TRATAMIENTO
             JOptionPane.showMessageDialog(null,"Comuníquese con el Administrador para solicitar ayuda");
-        }
-        
-    
+        }    
     }
     
+    public ArrayList<Object[]> buscarMiembroE(String cedula) { 
+            ArrayList<Object[]> listaObject=new ArrayList<>(); // instncia un objeto de tipo arrayList ingresa la cédula como parámetro
+        try {
+            // declara de tipo String una variable donde llama al sp con la cédula como parámetro
+            String sql = "call sp_buscarMiembroE_porCedula('"+cedula+"');"; 
+            ejecutar = (PreparedStatement) conectado.prepareCall(sql);
+            //TODA INSERCIÓN DEVUELVE UN ESTADO >0 CUANDO FUE FAVORABLE Y MENOR A O CUANDO NO SE REALIZÓ 
+            resultado = ejecutar.executeQuery();
+            int cont = 1;
+            while (resultado.next()) {
+                Object[] obmiembro = new Object[9]; //instancia un arreglo tipo objeto de 6
+                for (int i = 1; i < 9; i++) {
+                    obmiembro[i] = resultado.getObject(i);//obtener los valores de cada columna
+                }
+                obmiembro[0]=cont;
+                listaObject.add(obmiembro);
+                cont++;
+            }
+            ejecutar.close();//cierra la conexion
+            return listaObject;//retorna el registro del miembro del equipo
+           
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "COMUNÍQUESE CON EL ADMINISTRADOR");
+        }
+        return null;
+    }
     
+    public ArrayList<Object[]> datosMEquipo() {
+        ArrayList<Object[]> listaObject=new ArrayList<>();
+        try {
+            String sql = "call sp_listarMiembrosE();";
+            ejecutar = (PreparedStatement) conectado.prepareCall(sql);
+            resultado = ejecutar.executeQuery();
+            int cont = 1;
+            while (resultado.next()) {
+                Object[]  obmiembro = new Object[9];
+                for (int i = 1; i <9; i++) {
+                    obmiembro[i] = resultado.getObject(i);
+                }
+                obmiembro[0]=cont;
+                listaObject.add( obmiembro);
+                cont++;
+            }
+            ejecutar.close();
+            return listaObject;
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "COMUNÍQUESE CON EL ADMINISTRADOR");
+
+        }
+
+        return null;
+    }
+    
+    public void actualizarMiembroE(MEquipoModelo mem) {
+        try {
+            String sentenciaSQL="call sp_insertarMiembroE ('"+mem.getNombre()+"','"+mem.getApellido()+"','"+mem.getCedula()+"','"+mem.getFechaNac()+"','"+mem.getRol()+"','"+mem.getCorreo()+"','"+mem.getFechaIngesoPro()+"','"+mem.getEstado()+"');";
+            ejecutar = (PreparedStatement) conectado.prepareCall(sentenciaSQL);
+            int resultado1 = ejecutar.executeUpdate();
+            if (resultado1 > 0) {
+                JOptionPane.showMessageDialog(null, "Miembro del Equipo Actualizado con Éxito");
+            
+                ejecutar.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "Revise los datos ingresados");
+              
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR SQL");
+        }
+    }
     
     
     
