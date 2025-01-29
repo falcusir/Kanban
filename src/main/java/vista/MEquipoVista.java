@@ -240,6 +240,11 @@ public class MEquipoVista extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblMiembrosE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMiembrosEMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblMiembrosE);
 
         btnActualizar.setBackground(new java.awt.Color(255, 204, 204));
@@ -493,6 +498,33 @@ public class MEquipoVista extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void tblMiembrosEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMiembrosEMouseClicked
+       DefaultTableModel dtm=(DefaultTableModel)tblMiembrosE.getModel();
+       
+       txtNombre.setText((String) dtm.getValueAt(tblMiembrosE.getSelectedRow(), 1));
+       txtApellido.setText((String) dtm.getValueAt(tblMiembrosE.getSelectedRow(), 2));
+       txtCedula.setText(dtm.getValueAt(tblMiembrosE.getSelectedRow(), 3).toString());
+       txtFechaNac.setText(dtm.getValueAt(tblMiembrosE.getSelectedRow(), 4).toString());
+       //combo box rol
+//       String rol= (String) (dtm.getValueAt(tblMiembrosE.getSelectedRow(), 5));
+//       if ("Miembro del Equipo".equals(rol)){
+//            cbTipoUsuario.removeAllItems();
+//            cbTipoUsuario.addItem("Miembro del Equipo");
+//       }
+//       else if ("Administrador".equals(rol)){
+//           cbTipoUsuario.removeAllItems(); 
+//           cbTipoUsuario.addItem("Administrador");
+//       }
+//       else if ("Gestor de Proyecto".equals(rol)){
+//           cbTipoUsuario.removeAllItems(); 
+//           cbTipoUsuario.addItem("Gestor de Proyecto");
+//       }
+       txtCorreo.setText((String) dtm.getValueAt(tblMiembrosE.getSelectedRow(), 6));
+       txtFechaProy.setText((String) dtm.getValueAt(tblMiembrosE.getSelectedRow(), 7).toString());
+       //combo box estado
+       
+    }//GEN-LAST:event_tblMiembrosEMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
