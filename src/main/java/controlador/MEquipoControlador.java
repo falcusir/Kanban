@@ -36,7 +36,7 @@ public class MEquipoControlador {
             String sentenciaSQL="call sp_insertarMiembroE ('"+mem.getNombre()+"','"+mem.getApellido()+"','"+mem.getCedula()+"','"+mem.getFechaNac()+"','"+mem.getRol()+"','"+mem.getCorreo()+"','"+mem.getFechaIngesoPro()+"','"+mem.getEstado()+"');";
             ejecutar = conectado.prepareCall(sentenciaSQL);
             //TODA INSERCIÓN DEVUELVE UN ESTADO >0 CUANDO FUE FAVORABLE Y MENOR A O CUANDO NO SE REALIZÓ 
-            int res = ejecutar.executeUpdate();//poner play a la sentencia sql
+            int res = ejecutar.executeUpdate();//poner play a la sentencia sql // UPDATE -->recibo un REGISTRO de datos
             if (res > 0) {//>o transacción exitosa
                 JOptionPane.showMessageDialog(null,"Miembro del Equipo Creado con éxito");//llamar ventanas emergentes--sacar mensaje de diálogo
                 ejecutar.close();
@@ -57,7 +57,7 @@ public class MEquipoControlador {
             String sql = "call sp_buscarMiembroE_porCedula('"+cedula+"');"; 
             ejecutar = (PreparedStatement) conectado.prepareCall(sql);
             //TODA INSERCIÓN DEVUELVE UN ESTADO >0 CUANDO FUE FAVORABLE Y MENOR A O CUANDO NO SE REALIZÓ 
-            resultado = ejecutar.executeQuery();
+            resultado = ejecutar.executeQuery(); // QUERY -->recibo un conjunto de datos
             int cont = 1;
             while (resultado.next()) {
                 Object[] obmiembro = new Object[9]; //instancia un arreglo tipo objeto de 6
