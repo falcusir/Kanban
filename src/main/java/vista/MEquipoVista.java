@@ -480,7 +480,7 @@ public class MEquipoVista extends javax.swing.JInternalFrame {
             for (int i = a; i >=0; i--) {
                 modelo.removeRow(i);
             }
-            tblMiembrosE.setModel(modelo);
+            //tblMiembrosE.setModel(modelo);
         }
         
         private void cargarTabla(){
@@ -488,15 +488,31 @@ public class MEquipoVista extends javax.swing.JInternalFrame {
             for (Object[] listaFila : listaFilas) {
                 modelo.addRow(listaFila);
             }
-            //tblMiembrosE.setModel(modelo);
+            tblMiembrosE.setModel(modelo);
         }
         
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+        
+        mem.setCedula(txtCedula.getText());
+        mem.setNombre(txtNombre.getText());
+        mem.setApellido(txtApellido.getText());
+        mem.setFechaNac(txtFechaNac.getText());
+        mem.setCorreo(txtCorreo.getText());
+        mem.setRol(tipoUsuario);
+        mem.setFechaIngesoPro(txtFechaProy.getText());
+        mem.setEstado(estado);
+        
+        mec.actualizarMiembroE(mem);
+        limpiarTabla();
+        cargarTabla();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+       String cedula = txtCedula.getText();
+       mec.eliminarMiembroE(cedula);
+       limpiarTabla();
+       cargarTabla();
+        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void tblMiembrosEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMiembrosEMouseClicked

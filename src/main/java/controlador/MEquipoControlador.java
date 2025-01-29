@@ -106,7 +106,7 @@ public class MEquipoControlador {
     
     public void actualizarMiembroE(MEquipoModelo mem) {
         try {
-            String sentenciaSQL="call sp_insertarMiembroE ('"+mem.getNombre()+"','"+mem.getApellido()+"','"+mem.getCedula()+"','"+mem.getFechaNac()+"','"+mem.getRol()+"','"+mem.getCorreo()+"','"+mem.getFechaIngesoPro()+"','"+mem.getEstado()+"');";
+            String sentenciaSQL="call sp_actualizarMiembroE ('"+mem.getNombre()+"','"+mem.getApellido()+"','"+mem.getCedula()+"','"+mem.getFechaNac()+"','"+mem.getRol()+"','"+mem.getCorreo()+"','"+mem.getFechaIngesoPro()+"','"+mem.getEstado()+"');";
             ejecutar = (PreparedStatement) conectado.prepareCall(sentenciaSQL);
             int resultado1 = ejecutar.executeUpdate();
             if (resultado1 > 0) {
@@ -118,10 +118,27 @@ public class MEquipoControlador {
               
             }
         } catch (SQLException e) {
-            System.out.println("ERROR SQL");
+            JOptionPane.showMessageDialog(null, "Comuníquese con el administrador");
         }
     }
-    
+
+    public void eliminarMiembroE(String cedula) {
+        try {
+            String sql = "call sp_EliminarPostulante(" + cedula + ");";
+            ejecutar = (PreparedStatement) conectado.prepareCall(sql);
+            int resultado1 = ejecutar.executeUpdate();
+            if (resultado1 > 0) {
+                JOptionPane.showMessageDialog(null, "Miembro del Equipo Eliminado con éxito");
+ 
+                ejecutar.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "Revise los datos a eliminar");
+      
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Comuníquese con el administrador"+e);
+        }
+    }
     
     
     
