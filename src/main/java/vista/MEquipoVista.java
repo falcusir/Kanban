@@ -135,6 +135,11 @@ public class MEquipoVista extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
         jLabel1.setText("DATOS PERSONALES");
@@ -404,14 +409,7 @@ public class MEquipoVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
-        txtCedula.setText("");
-        txtNombre.setText("");
-        txtApellido.setText("");
-        txtFechaNac.setText("");
-        txtCorreo.setText("");
-        txtAResumen.setText("");
-        txtFechaProy.setText("");
+      limpiarEntradas();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void cbTipoUsuarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoUsuarioItemStateChanged
@@ -491,6 +489,16 @@ public class MEquipoVista extends javax.swing.JInternalFrame {
             tblMiembrosE.setModel(modelo);
         }
         
+    
+        private void limpiarEntradas(){
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtFechaNac.setText("");
+        txtCorreo.setText("");
+        txtAResumen.setText("");
+        txtFechaProy.setText("");
+        }
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         
         mem.setCedula(txtCedula.getText());
@@ -512,7 +520,7 @@ public class MEquipoVista extends javax.swing.JInternalFrame {
        mec.eliminarMiembroE(cedula);
        limpiarTabla();
        cargarTabla();
-        
+       limpiarEntradas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void tblMiembrosEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMiembrosEMouseClicked
@@ -541,6 +549,10 @@ public class MEquipoVista extends javax.swing.JInternalFrame {
        //combo box estado
        
     }//GEN-LAST:event_tblMiembrosEMouseClicked
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        cargarTabla();
+    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

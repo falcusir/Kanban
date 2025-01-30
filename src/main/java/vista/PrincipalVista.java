@@ -28,6 +28,7 @@ public class PrincipalVista extends javax.swing.JFrame {
     private void initComponents() {
 
         jdPrincipal = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMIngresarU = new javax.swing.JMenuItem();
@@ -35,15 +36,27 @@ public class PrincipalVista extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel1.setText("KANBAN");
+
+        jdPrincipal.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jdPrincipalLayout = new javax.swing.GroupLayout(jdPrincipal);
         jdPrincipal.setLayout(jdPrincipalLayout);
         jdPrincipalLayout.setHorizontalGroup(
             jdPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 682, Short.MAX_VALUE)
+            .addGroup(jdPrincipalLayout.createSequentialGroup()
+                .addGap(213, 213, 213)
+                .addComponent(jLabel1)
+                .addContainerGap(223, Short.MAX_VALUE))
         );
         jdPrincipalLayout.setVerticalGroup(
             jdPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 542, Short.MAX_VALUE)
+            .addGroup(jdPrincipalLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(340, Short.MAX_VALUE))
         );
 
         jMenu2.setText("Opciones");
@@ -120,6 +133,7 @@ public class PrincipalVista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMIngresarU;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
